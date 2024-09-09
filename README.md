@@ -1,5 +1,5 @@
-# FIAP - 3 ano - Engenharia de computação - Advanced-Programming-Mobile-Devel
-Quarto checkpoint da matéria Advanced Programming &amp; Mobile Dev
+# FIAP - 3 ano - Engenharia de computação - Advanced Programming Mobile Developer
+Quarto checkpoint da matéria Advanced Programming Mobile Developer
 Este repositório contém a resolução de exercícios de TypeScript abordando conceitos fundamentais como interfaces, tipos avançados (união e interseção), classes, herança, módulos e namespaces.
 
 ## Estrutura do Repositório
