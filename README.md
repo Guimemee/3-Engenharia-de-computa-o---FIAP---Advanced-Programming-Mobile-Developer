@@ -1,91 +1,167 @@
-# FIAP - 3 ano - Engenharia de computação - Advanced Programming Mobile Developer
-Quarto checkpoint da matéria Advanced Programming Mobile Developer
-Este repositório contém a resolução de exercícios de TypeScript abordando conceitos fundamentais como interfaces, tipos avançados (união e interseção), classes, herança, módulos e namespaces.
+# FIAP - Engenharia de Computação - Checkpoint 4 🎓🚀
+### Advanced Programming Mobile Developer - TypeScript Deep Dive
 
-## Estrutura do Repositório
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-- **Exercicio1.ts**: Demonstra o uso de interfaces e tipos de união (`Produto` e `FormaPagamento`).
-- **Exercicio2.ts**: Explora a interseção de tipos (`Pessoa` e `Empregado`).
-- **Exercicio3.ts**: Implementa classes e herança com as classes `Funcionario` e `Gerente`.
-- **Exercicio4.ts**: Apresenta herança e sobrescrita de métodos com `ContaBancaria` e `ContaCorrente`.
-- **Cliente.ts** e **Pedido.ts**: Demonstra o uso de módulos para organizar código relacionado a clientes e pedidos.
-- **Financeiro.ts**: Utiliza namespaces para encapsular funcionalidades relacionadas a cálculos financeiros.
+Repositório técnico contendo a implementação padronizada, modular e fortemente tipada dos exercícios do **Checkpoint 4** da disciplina de *Advanced Programming Mobile Developer* (3º ano de Engenharia de Computação - FIAP).
 
-## Pasta Generics em TypeScript
+O projeto aborda conceitos fundamentais e avançados do ecossistema TypeScript:
+- **Interfaces e Tipos de União** (*Union Types*)
+- **Interseção de Tipos** (*Intersection Types*)
+- **POO, Herança e Polimorfismo** (*Method Overriding & Encapsulation*)
+- **Módulos ES6 vs Namespaces**
+- **Generics com Restrições de Tipo** (*Generic Constraints*)
+- **Decorators de Método** (*Method Decorators / Metaprogramming*)
+- **Custom Error Handling** (*Tratamento de Exceções com Hierarquia de Erros*)
+- **Assincronismo com Promises e Async/Await**
 
-## 01 - Função genérica
+---
 
-Explicação:
-A função usa um tipo genérico <T>, que restringimos para aceitar apenas number ou string com <T extends number | string>.
-O código começa verificando se o array está vazio, evitando erros no loop.
-O loop for percorre o array e compara cada elemento para determinar o maior valor.
-Função encontrarMaiorElemento()
+## 🏛️ Arquitetura e Estrutura de Diretórios
 
-Lógica de Comparação: O primeiro elemento do array é considerado o maior inicialmente. Em seguida, a função percorre o array, comparando cada elemento com o maior elemento conhecido. Se um elemento maior for encontrado, o maior é atualizado.
-Para números, o maior é 30.
-Para strings, o maior é determinado pela ordem lexicográfica (alfabética), sendo zebra o maior entre gato, elefante.
-Comparação Lexicográfica (Ordem Alfabética)
-Quando você compara strings em linguagens de programação (como em JavaScript ou TypeScript), a comparação é feita com base na ordem lexicográfica. Essa ordem é, essencialmente, a ordem alfabética, mas leva em conta os códigos numéricos associados a cada caractere (geralmente o código Unicode ou ASCII).
+```
+Checkpoint_4---Frontend/
+├── exercicio_1/                    # Módulo 1: Fundamentos de Tipagem e POO
+│   ├── Cliente.ts                  # Entidade de domínio Cliente
+│   ├── Pedido.ts                   # Entidade Pedido com injeção de dependência de Cliente
+│   ├── Exercicio1.ts               # Interfaces e Union Types (Produto & FormaPagamento)
+│   ├── Exercicio2.ts               # Intersection Types (Pessoa & Empregado)
+│   ├── Exercicio3.ts               # Herança de Classes (Funcionario & Gerente)
+│   ├── Exercicio4.ts               # Polimorfismo e Sobrescrita (ContaBancaria & ContaCorrente)
+│   ├── Financeiro.ts               # Encapsulamento com Namespace TypeScript
+│   ├── Main.ts                     # Runner de validação do módulo Financeiro
+│   └── Principal.ts                # Entrypoint de integração Cliente/Pedido
+├── exercicio_2/                    # Módulo 2: Recursos Avançados de TypeScript
+│   ├── GenericF.ts                 # Função genérica com restrição <T extends number | string>
+│   ├── medirTempoDeExecucao.ts     # Decorator de método para telemetria de execução
+│   ├── verificarEmail.ts           # Exceção customizada (EmailInvalidoError)
+│   └── buscarDadosDaAPI.ts         # Consumo assíncrono simulado com tipagem de resposta
+├── tsconfig.json                   # Configuração estrita do compilador TypeScript
+├── package.json                    # Scripts e metadados de execução
+├── .gitignore                      # Exclusão de node_modules, dist/ e artefatos locais
+└── README.md                       # Documentação técnica detalhada
+```
 
-Veja Tabela neste [link da tabela - Tabela com os valores ASCII/Unicode dos caracteres alfabéticos](https://whimsical.com/tabela-com-os-valores-ascii-unicode-dos-caracteres-alfabeticos-6Lr438X8Hijg6qZ3TqN4rL)
+---
 
-Detalhes importantes sobre essa comparação:
+## 📐 Diagrama de Classes e Relações
 
-1. Ordem dos Caracteres
-   Cada caractere em uma string tem um valor numérico associado. Por exemplo:
-   No Unicode/ASCII, a letra 'a' tem o valor 97, 'b' tem o valor 98, 'z' tem o valor 122, e assim por diante.
-   As letras maiúsculas têm valores menores do que as letras minúsculas. Por exemplo, 'A' tem o valor 65, enquanto 'a' tem o valor 97.
-2. Comparação de Strings
-   Quando duas strings são comparadas, a comparação é feita caractere por caractere, da esquerda para a direita:
-   Se o primeiro caractere de uma string for maior que o primeiro caractere da outra string, essa string será considerada maior.
-   Se os primeiros caracteres forem iguais, a comparação segue para o próximo caractere, e assim por diante, até encontrar uma diferença ou até que todas as letras tenham sido comparadas.
-3. Na Prática
-   Vamos considerar as strings ['gato', 'elefante', 'zebra']:
-   Comparação 'gato' vs 'elefante':
-   O primeiro caractere de 'gato' é 'g' (valor 103), e o primeiro caractere de 'elefante' é 'e' (valor 101).
-   Como 'g' tem um valor maior que 'e', 'gato' é considerado maior que 'elefante'.
-   Comparação 'gato' vs 'zebra':
-   O primeiro caractere de 'gato' é 'g' (valor 103), e o primeiro caractere de 'zebra' é 'z' (valor 122).
-   Como 'z' tem um valor maior que 'g', 'zebra' é considerado maior que 'gato'.
-   Comparação 'elefante' vs 'zebra':
-   O primeiro caractere de 'elefante' é 'e' (valor 101), e o primeiro caractere de 'zebra' é 'z' (valor 122).
-   Como 'z' tem um valor maior que 'e', 'zebra' é considerado maior que 'elefante'.
-   Portanto, no array ['gato', 'elefante', 'zebra'], a string 'zebra' será considerada a "maior" porque seu primeiro caractere 'z' tem um valor maior na ordem lexicográfica do que os primeiros caracteres de 'gato' e 'elefante'.
+```mermaid
+classDiagram
+    class Pessoa {
+        +string nome
+        +number idade
+    }
+    class Empregado {
+        +string empresa
+        +number salario
+    }
+    class PessoaEmpregada {
+        <<intersection>>
+    }
+    Pessoa <|.. PessoaEmpregada
+    Empregado <|.. PessoaEmpregada
 
-## 02 - Medir Temperatura
+    class Funcionario {
+        +string nome
+        +string cargo
+        +number salario
+        +descricao() string
+    }
+    class Gerente {
+        +string departamento
+        +descricaoDetalhada() string
+    }
+    Funcionario <|-- Gerente
 
-O decorator medirTempoDeExecucao intercepta a execução de um método e mede o tempo que ele leva para ser executado.
-console.time() inicia a medição e console.timeEnd() finaliza e imprime o tempo no console.
-O método original é executado normalmente com metodoOriginal.apply(this, args).
+    class ContaBancaria {
+        +string titular
+        +number saldo
+        +exibirSaldo() string
+    }
+    class ContaCorrente {
+        +number limiteCredito
+        +exibirSaldo() string
+    }
+    ContaBancaria <|-- ContaCorrente
+```
 
-## 03 - Verificar e-mail
+---
 
-Criamos um erro customizado EmailInvalidoError que herda da classe Error.
-Na função verificarEmail, utilizamos o método includes() para verificar se o email contém @.
-Se o email for inválido, lançamos uma instância de EmailInvalidoError.
-O bloco try/catch captura o erro, e o instanceof garante que estamos lidando com o erro correto.
+## 📚 Detalhamento dos Conceitos Implementados
 
-## 04 - Buscador de API
+### 1. Interfaces e Union Types (`Exercicio1.ts`)
+Demonstra o desacoplamento de contratos de dados através de `interface Produto` e a restrição de valores de pagamento aceitos via união de literais `'dinheiro' | 'cartão' | 'pix'`, garantindo validação estática em tempo de compilação sem custos adicionais em runtime.
 
-buscarDadosDaAPI simula uma chamada a uma API usando setTimeout e retorna uma Promise.
-Dependendo de uma condição aleatória, a Promise é resolvida ou rejeitada.
-executarBusca usa async/await para aguardar a resposta e trata possíveis erros com try/catch.
+### 2. Intersection Types (`Exercicio2.ts`)
+Combina múltiplos tipos estruturais (`Pessoa` e `Empregado`) em um único tipo `PessoaEmpregada = Pessoa & Empregado`. Permite composição flexível sem a rigidez de herança múltipla.
 
+### 3. Herança e Modificadores de Parâmetro (`Exercicio3.ts`)
+Utiliza sintaxe concisa de construtor do TypeScript (`public nome: string`) para declarar e inicializar atributos automaticamente. A subclasse `Gerente` estende `Funcionario` e invoca `super()` para reutilização de comportamento.
 
-## Como Usar
+### 4. Polimorfismo e `override` (`Exercicio4.ts`)
+Implementa sobrescrita controlada do método `exibirSaldo()` na classe `ContaCorrente`, adicionando o limite de crédito ao saldo total disponível.
 
-1. Clone este repositório.
-2. Instale o TypeScript globalmente, se ainda não estiver instalado: `npm install -g typescript`.
-3. Compile os arquivos TypeScript utilizando o comando `tsc <nome-do-arquivo>.ts`.
-4. Execute os arquivos JavaScript gerados conforme necessário.
+### 5. Namespaces vs ES Modules (`Financeiro.ts`, `Cliente.ts`, `Pedido.ts`)
+- **Namespaces**: Agrupamento lógico interno via palavra-chave `namespace`, ideal para bibliotecas legadas ou empacotamento de funções utilitárias sem poluir o escopo global.
+- **ES Modules**: Padrão moderno da indústria com `export` e `import` pontuais, proporcionando melhor suporte a *tree-shaking* e empacotadores modernos (Webpack, Vite, Rollup).
 
-## Requisitos
+### 6. Generic Constraints (`GenericF.ts`)
+Implementa a função `encontrarMaiorElemento<T extends number | string>(array: T[]): T`:
+- O parâmetro de tipo `T` é restrito a aceitar apenas tipos comparáveis (`number` ou `string`).
+- Garante segurança de tipo ao manipular arrays numéricos ou arrays de strings com ordenação lexicográfica (ASCII/Unicode).
 
-- Node.js e npm instalados.
-- TypeScript instalado globalmente.
+### 7. Method Decorators (`medirTempoDeExecucao.ts`)
+Utiliza metaprogramação através de decorators experimentais do TypeScript para interceptar métodos de classe em tempo de execução, injetando cronômetros de medição de desempenho (`console.time` / `console.timeEnd`) de forma transparente e desacoplada da lógica de negócio.
 
-- 
+### 8. Custom Error Classes (`verificarEmail.ts`)
+Criação da classe `EmailInvalidoError extends Error` com redefinição de protótipo (`Object.setPrototypeOf`), permitindo verificação refinada através de `instanceof` dentro de blocos `try/catch`.
 
-## Observações
+### 9. Async/Await & Typed Promises (`buscarDadosDaAPI.ts`)
+Padrão robusto para chamadas assíncronas com tratamento de erros `try/catch`, tipagem estrita de retorno com `Promise<RespostaAPI>` e diferenciação segura entre instâncias de `Error` e falhas imprevistas.
 
-Este repositório foi criado como parte de um exercício para a disciplina de Advanced Programming Mobile Deve . O código está organizado de acordo com o enunciado do mesmo.
+---
+
+## 🛠️ Como Executar
+
+### Pré-requisitos
+- [Node.js](https://nodejs.org/) (versão 18 ou superior)
+- [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
+
+### Instalação de Dependências
+```bash
+npm install
+```
+
+### Compilação do TypeScript
+Para compilar todo o projeto para JavaScript (gerando a pasta `dist/`):
+```bash
+npm run build
+```
+
+Para manter o compilador monitorando alterações em tempo real:
+```bash
+npm run watch
+```
+
+### Execução dos Exercícios
+```bash
+# Executar integração Cliente/Pedido
+npm run run:ex1
+
+# Executar função genérica
+npm run run:ex2-generic
+
+# Executar medição por decorator
+npm run run:ex2-decorator
+
+# Executar simulação de API assíncrona
+npm run run:ex2-api
+```
+
+---
+
+## 👨‍💻 Autoria
+Desenvolvido por **Guilherme Macario da Silva** no âmbito do curso de Engenharia de Computação da **FIAP**.

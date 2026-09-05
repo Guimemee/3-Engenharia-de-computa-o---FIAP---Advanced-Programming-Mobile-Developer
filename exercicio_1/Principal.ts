@@ -1,9 +1,12 @@
-// Importação da classe Pedido
-import { Pedido } from './Pedido';
-import { Cliente } from './Checkpoint_4---Frontend/Cliente';
+/**
+ * Ponto de Entrada / Demonstração Geral do Exercício 1
+ */
 
-// Criação de instâncias de Pedido e Cliente
+import { Cliente } from './Cliente';
+import { Pedido } from './Pedido';
+
 const clienteExemplo = new Cliente('Lucas', 'lucas@gmail.com');
 const pedidoExemplo = new Pedido(clienteExemplo, 'Notebook', 4500);
 
+console.log('--- Execução do Módulo Pedido / Cliente ---');
 console.log(pedidoExemplo.exibirPedido());

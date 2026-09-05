@@ -1,26 +1,35 @@
-class EmailInvalidoError extends Error {
-    constructor(message: string) {
-        super(message);
-        this.name = 'EmailInvalidoError';  // Nome do erro customizado
-    }
+/**
+ * Exercício 2.3: Tratamento de Erros Customizados em TypeScript
+ */
+
+export class EmailInvalidoError extends Error {
+  constructor(message: string = 'Endereço de e-mail inválido: deve conter o caractere @.') {
+    super(message);
+    this.name = 'EmailInvalidoError';
+    Object.setPrototypeOf(this, EmailInvalidoError.prototype);
+  }
 }
 
-function verificarEmail(email: string): void {
-    // Verificamos se o email contém o caractere '@'
-    if (!email.includes('@')) {
-        // Lançamos o erro personalizado caso o email seja inválido
-        throw new EmailInvalidoError('Email inválido: O email deve conter o caractere "@"');
-    }
-
-    console.log('Email válido!');
+export function verificarEmail(email: string): boolean {
+  if (!email.includes('@')) {
+    throw new EmailInvalidoError(`O e-mail '${email}' não possui o formato esperado.`);
+  }
+  return true;
 }
 
-// Exemplo de uso:
-try {
-    verificarEmail('usuario.com');  // Não contém '@', então lançará o erro
-} catch (error) {
-    // Captura o erro e imprime a mensagem
+// Demonstração
+function testarValidacao(email: string): void {
+  try {
+    verificarEmail(email);
+    console.log(`[SUCESSO] O e-mail '${email}' é válido.`);
+  } catch (error) {
     if (error instanceof EmailInvalidoError) {
-        console.error(error.message);  // Deve imprimir "Email inválido"
+      console.error(`[ERRO CUSTOMIZADO] ${error.name}: ${error.message}`);
+    } else {
+      console.error(`[ERRO INESPERADO]`, error);
     }
+  }
 }
+
+testarValidacao('usuario@empresa.com.br');
+testarValidacao('usuario.empresa.com.br');

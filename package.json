@@ -1,0 +1,20 @@
+{
+  "name": "fiap-checkpoint-4-frontend-ts",
+  "version": "1.0.0",
+  "description": "FIAP - Engenharia de Computação - Advanced Programming Mobile Developer - Checkpoint 4 (TypeScript)",
+  "author": "Guilherme Macario da Silva",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc --watch",
+    "clean": "rimraf dist",
+    "start": "tsc && node dist/exercicio_1/Principal.js",
+    "run:ex1": "tsc && node dist/exercicio_1/Principal.js",
+    "run:ex2-generic": "tsc && node dist/exercicio_2/GenericF.js",
+    "run:ex2-decorator": "tsc && node dist/exercicio_2/medirTempoDeExecucao.js",
+    "run:ex2-api": "tsc && node dist/exercicio_2/buscarDadosDaAPI.js"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
+}

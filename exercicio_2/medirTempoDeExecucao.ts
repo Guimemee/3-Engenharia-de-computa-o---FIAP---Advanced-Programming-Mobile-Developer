@@ -1,26 +1,32 @@
-function medirTempoDeExecucao(target: any, propertyKey: string, descriptor: PropertyDescriptor) {
-    // Guardamos a função original
-    const metodoOriginal = descriptor.value;
+/**
+ * Exercício 2.2: Decorator de Método para Medição de Desempenho
+ */
 
-    // Substituímos a função original por uma nova que mede o tempo
-    descriptor.value = function (...args: any[]) {
-        console.time(propertyKey);  // Inicia a medição do tempo
-        const resultado = metodoOriginal.apply(this, args);  // Executa a função original
-        console.timeEnd(propertyKey);  // Finaliza a medição e exibe o tempo no console
-        return resultado;
-    };
-    
-    return descriptor;
+export function medirTempoDeExecucao(
+  target: any,
+  propertyKey: string,
+  descriptor: PropertyDescriptor
+): PropertyDescriptor {
+  const metodoOriginal = descriptor.value;
+
+  descriptor.value = function (...args: any[]) {
+    console.time(`[Benchmark] ${propertyKey}`);
+    const resultado = metodoOriginal.apply(this, args);
+    console.timeEnd(`[Benchmark] ${propertyKey}`);
+    return resultado;
+  };
+
+  return descriptor;
 }
 
-class Calculadora {
-    @medirTempoDeExecucao
-    somarNumeros(array: number[]): number {
-        // Simula uma operação que pode demorar um pouco
-        return array.reduce((a, b) => a + b, 0);  // Soma todos os números do array
-    }
+export class Calculadora {
+  @medirTempoDeExecucao
+  somarNumeros(array: number[]): number {
+    return array.reduce((acumulador, valor) => acumulador + valor, 0);
+  }
 }
 
-// Exemplo de uso:
+// Demonstração
 const calc = new Calculadora();
-calc.somarNumeros([1, 2, 3, 4, 5]);  // Exibe o tempo de execução no console
+const resultadoSoma = calc.somarNumeros([10, 20, 30, 40, 50, 100, 200]);
+console.log(`Resultado da Soma: ${resultadoSoma}`);

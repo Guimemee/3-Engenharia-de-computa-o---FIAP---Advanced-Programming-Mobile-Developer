@@ -1,11 +1,17 @@
-// Importação da classe Cliente
-import { Cliente } from './Checkpoint_4---Frontend/Cliente';
+/**
+ * Módulo de Entidade: Pedido
+ */
 
-// Definição da classe Pedido
+import { Cliente } from './Cliente';
+
 export class Pedido {
-constructor(public cliente: Cliente, public produto: string, public valor: number) {}
+  constructor(
+    public cliente: Cliente,
+    public produto: string,
+    public valor: number
+  ) {}
 
-exibirPedido(): string {
+  exibirPedido(): string {
     return `Cliente: ${this.cliente.nome}, Produto: ${this.produto}, Valor: R$${this.valor.toFixed(2)}`;
-}
+  }
 }
